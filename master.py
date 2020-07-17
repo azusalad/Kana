@@ -15,7 +15,7 @@ import sys
 import time
 char_dict={
     #dictionary of hiragana characters
-    "hiragana":{
+    "hiragana":[
         {
         'あ' : ['a'],
         'い' : ['i'],
@@ -151,9 +151,9 @@ char_dict={
         'りゅ' : ['ryu'],
         'りょ' : ['ryo']
         }
-    }
+    ],
     #dictionary of katakana characters
-    "katakana":{
+    "katakana":[
         #1
         {
         'ア' : ['a'],
@@ -222,7 +222,7 @@ char_dict={
         'ペ' : ['pe'],
         'ポ' : ['po']
         }
-    }
+    ]
 }
 #used to display characters in english
 char_display_dict={
@@ -299,7 +299,7 @@ char_display_dict={
 'を' : 'wo'
 }
 word_dict={
-"hiragana"{
+"hiragana":{
     'あい' : ['love'],
     'いう' : ['to say'],
     'あう' : ['to meet'],
@@ -412,7 +412,7 @@ word_dict={
     'けいご' : ['honorific'],
     'ごかい' : ['misunderstanding'],
     'かがく' : ['science']
-    }
+    },
     #$ ???
     "katakana":{
     }
@@ -536,23 +536,23 @@ session_char_list=[
 'りょ' : [0]}
 ]
 #$ this actually has no usage in the code whats this used for
-dir_dict={
-'1' : ['vowels'],
-'2' : ['k'],
-'3' : ['s'],
-'4' : ['t'],
-'5' : ['n'],
-'6' : ['h'],
-'7' : ['m'],
-'8' : ['y'],
-'9' : ['r'],
-'10' : ['w'],
-'11' : ['katakana vowels']
-'12' : ['katakana k']
-'13' : ['katakana t']
-'14' : ['katakana n']
-'15' : ['katakana h']
-}
+# dir_dict={
+# '1' : ['vowels'],
+# '2' : ['k'],
+# '3' : ['s'],
+# '4' : ['t'],
+# '5' : ['n'],
+# '6' : ['h'],
+# '7' : ['m'],
+# '8' : ['y'],
+# '9' : ['r'],
+# '10' : ['w'],
+# '11' : ['katakana vowels']
+# '12' : ['katakana k']
+# '13' : ['katakana t']
+# '14' : ['katakana n']
+# '15' : ['katakana h']
+# }
 #use this for the save
 save_buffer={}
 #name of the file in which the save data is stored
@@ -570,7 +570,12 @@ def load():
     with open(filename,"a+",encoding="utf8") as lmao:
         lmao.seek(0,2)
         if lmao.tell() == 0:
-            save_buffer={"chars":{},"words":{},"chars_number":0,"words_number":0}
+            save_buffer={
+            "chars":{},
+            "words":{},
+            "chars_number":0,
+            "words_number":0,
+            }
             lmao.write(json.dumps(save_buffer))
             return 1
         else:
@@ -592,11 +597,11 @@ if c == 1:
     d=int(input("Just that group? 1 for yes 2 for no "))
     while True:
         if d == 1:
-            group_number= int(a-1)
+            group_number= a-1
         else:
             group_number=random.randint(0,a-1)
-        random_key=random.choice(list(char_list[group_number]))
-        character_list=char_list[group_number][random_key]
+        random_key=random.choice(list(char_dict["hiragana"][group_number]))
+        character_list=char_dict["hiragana"][group_number][random_key]
         if random_key not in save_buffer["chars"].keys():
             save_buffer["chars"][random_key]={"right":0,"wrong":0,"right_guesses":{},"wrong_guesses":{},"average_time":0,"times":[]}
         l=save_buffer["chars"][random_key]
@@ -625,8 +630,8 @@ if c == 1:
         save()
 elif c == 2:
     while True:
-        random_key=random.choice(list(word_dict))
-        word_list=word_dict[random_key]
+        random_key=random.choice(list(word_dict["hiragana"]))
+        word_list=word_dict["hiragana"][random_key]
         if random_key not in save_buffer["words"].keys():
             save_buffer["words"][random_key]={"right":0,"wrong":0,"right_guesses":{},"wrong_guesses":{},"average_time":0,"times":[]}
         l=save_buffer["words"][random_key]
