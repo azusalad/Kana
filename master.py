@@ -1,4 +1,6 @@
 """version 3.3
+
+3.4: added dir and h column of katakana
 3.3: added 2 columns of katakana
 3.2: added wrong detection
 3.1: started session mode
