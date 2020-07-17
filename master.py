@@ -1,196 +1,231 @@
 """version 3.3
-
 3.4: added dir and h column of katakana
 3.3: added 2 columns of katakana
 3.2: added wrong detection
 3.1: started session mode
-
 2.0: added save file
-
 1.1: added only certain character column
 1.0: creation"""
+
+# #$ things picky needs to check
+# #^ things randomguy needs to check
 import random
 import json
 import sys
 import time
-char_list=[
-#1
-{'あ' : ['a'],
-'い' : ['i'],
-'う' : ['u'],
-'え' : ['e'],
-'お' : ['o']},
-#2
-{'か' : ['ka'],
-'き' : ['ki'],
-'く' : ['ku'],
-'け' : ['ke'],
-'こ' : ['ko'],
-'が' : ['ga'],
-'ぎ' : ['gi'],
-'ぐ' : ['gu'],
-'げ' : ['ge'],
-'ご' : ['go']},
-#3
-{'さ' : ['sa'],
-'し' : ['shi'],
-'す' : ['su'],
-'せ' : ['se'],
-'そ' : ['so'],
-'ざ' : ['za'],
-'じ' : ['ji'],
-'ず' : ['zu'],
-'ぜ' : ['ze'],
-'ぞ' : ['zo'],
-'ん' : ['n']},
-#4
-{'た' : ['ta'],
-'ち' : ['chi'],
-'つ' : ['tsu'],
-'っ' : ['xtsu'],
-'て' : ['te'],
-'と' : ['to'],
-'だ' : ['da'],
-'ぢ' : ['di','ji','jhi'],
-'づ' : ['du'],
-'で' : ['de'],
-'ど' : ['do']},
-#5
-{'な' : ['na'],
-'に' : ['ni'],
-'ぬ' : ['nu'],
-'ね' : ['ne'],
-'の' : ['no']},
-#6
-{'は' : ['ha'],
-'ひ' : ['hi'],
-'ふ' : ['fu'],
-'へ' : ['he'],
-'ほ' : ['ho'],
-'ば' : ['ba'],
-'び' : ['bi'],
-'ぶ' : ['bu'],
-'べ' : ['be'],
-'ぼ' : ['bo'],
-'ぱ' : ['pa'],
-'ぴ' : ['pi'],
-'ぷ' : ['pu'],
-'ぺ' : ['pe'],
-'ぽ' : ['po']},
-#7
-{'ま' : ['ma'],
-'み' : ['mi'],
-'む' : ['mu'],
-'め' : ['me'],
-'も' : ['mo']},
-#8
-{'や' : ['ya'],
-'ゆ' : ['yu'],
-'よ' : ['yo']},
- 
-#9
-{'ら' : ['ra'],
-'り' : ['ri'],
-'る' : ['ru'],
-'れ' : ['re'],
-'ろ' : ['ro']},
-#10
-{'わ' : ['wa'],
-'を' : ['wo']},
-#11
-{'きゃ' : ['kya'],
-'きゅ' : ['kyu'],
-'きょ' : ['kyo'],
-'ぎゃ' : ['gya'],
-'ぎゅ' : ['gyu'],
-'ぎょ' : ['gyo'],
-'しゃ' : ['sha','shya'],
-'しゅ' : ['shu','shyu'],
-'しょ' : ['sho','shyo'],
-'じゃ' : ['jya'],
-'じゅ' : ['jyu'],
-'じょ' : ['jyo'],
-'ちゃ' : ['cya','chya'],
-'ちゅ' : ['cyu','chyu'],
-'ちょ' : ['cyo','chyo'],
-'ひゃ' : ['hya'],
-'ひゅ' : ['hyu'],
-'ひょ' : ['hyo'],
-'びゃ' : ['bya'],
-'びゅ' : ['byu'],
-'びょ' : ['byo'],
-'ぴゃ' : ['pya'],
-'ぴゅ' : ['pyu'],
-'ぴょ' : ['pyo'],
-'みゃ' : ['mya'],
-'みゅ' : ['myu'],
-'みょ' : ['myo'],
-'りゃ' : ['rya'],
-'りゅ' : ['ryu'],
-'りょ' : ['ryo']}
-#12
-{'ア' : ['a'],
-'イ' : ['i'],
-'ウ' : ['u'],
-'ヴ' : ['vu'],
-'エ' : ['e'],
-'オ' : ['o'],
-'イェ' : ['ye','ixe'],
-'ウィ' : ['wi','uxi'],
-'ウェ' : ['we','uxe'],
-'ウォ' : ['wo','uxo'],
-'ヴァ' : ['va','vuxa'],
-'ヴィ' : ['vi','vuxi'],
-'ヴェ' : ['ve','vuxe'],
-'ヴォ' : ['vo','vuxo'],
-},
-#13
-{'カ' : ['ka'],
-'キ' : ['ki'],
-'ク' : ['ku'],
-'ケ' : ['ke'],
-'コ' : ['ko'],
-'ガ' : ['ga'],
-'ギ' : ['gi'],
-'グ' : ['gu'],
-'ゲ' : ['ge'],
-'ゴ' : ['go']},
-#14
-{'サ' : ['sa'],
-'シ' : ['shi'],
-'シェ' : ['she'],
-'ス' : ['su'],
-'セ' : ['se'],
-'ソ' : ['so'],
-'ザ' : ['za'],
-'ジ' : ['ji'],
-'ジェ' : ['jhe','je'],
-'ズ' : ['zu'],
-'ゼ' : ['ze'],
-'ゾ' : ['zo'],
-'ン' : ['n']},
-#15
-{'ハ' : ['ha'],
-'ヒ' : ['hi'],
-'ファ' : ['fa'],
-'フィ' : ['fi'],
-'フ' : ['fu'],
-'フェ' : ['fe'],
-'フォ' : ['fo'],
-'ヘ' : ['he'],
-'ホ' : ['ho'],
-'バ' : ['ba'],
-'ビ' : ['bi'],
-'ブ' : ['bu'],
-'ベ' : ['be'],
-'ボ' : ['bo'],
-'パ' : ['pa'],
-'ピ' : ['pi'],
-'プ' : ['pu'],
-'ペ' : ['pe'],
-'ポ' : ['po']},
-]
 char_dict={
+    #dictionary of hiragana characters
+    "hiragana":{
+        {
+        'あ' : ['a'],
+        'い' : ['i'],
+        'う' : ['u'],
+        'え' : ['e'],
+        'お' : ['o']
+        },
+        #2
+        {
+        'か' : ['ka'],
+        'き' : ['ki'],
+        'く' : ['ku'],
+        'け' : ['ke'],
+        'こ' : ['ko'],
+        'が' : ['ga'],
+        'ぎ' : ['gi'],
+        'ぐ' : ['gu'],
+        'げ' : ['ge'],
+        'ご' : ['go']
+        },
+        #3
+        {
+        'さ' : ['sa'],
+        'し' : ['shi'],
+        'す' : ['su'],
+        'せ' : ['se'],
+        'そ' : ['so'],
+        'ざ' : ['za'],
+        'じ' : ['ji'],
+        'ず' : ['zu'],
+        'ぜ' : ['ze'],
+        'ぞ' : ['zo'],
+        'ん' : ['n']
+        },
+        #4
+        {
+        'た' : ['ta'],
+        'ち' : ['chi'],
+        'つ' : ['tsu'],
+        'っ' : ['xtsu'],
+        'て' : ['te'],
+        'と' : ['to'],
+        'だ' : ['da'],
+        'ぢ' : ['di','ji','jhi'],
+        'づ' : ['du'],
+        'で' : ['de'],
+        'ど' : ['do']
+        },
+        #5
+        {
+        'な' : ['na'],
+        'に' : ['ni'],
+        'ぬ' : ['nu'],
+        'ね' : ['ne'],
+        'の' : ['no']
+        },
+        #6
+        {
+        'は' : ['ha'],
+        'ひ' : ['hi'],
+        'ふ' : ['fu'],
+        'へ' : ['he'],
+        'ほ' : ['ho'],
+        'ば' : ['ba'],
+        'び' : ['bi'],
+        'ぶ' : ['bu'],
+        'べ' : ['be'],
+        'ぼ' : ['bo'],
+        'ぱ' : ['pa'],
+        'ぴ' : ['pi'],
+        'ぷ' : ['pu'],
+        'ぺ' : ['pe'],
+        'ぽ' : ['po']
+        },
+        #7
+        {
+        'ま' : ['ma'],
+        'み' : ['mi'],
+        'む' : ['mu'],
+        'め' : ['me'],
+        'も' : ['mo']
+        },
+        #8
+        {
+        'や' : ['ya'],
+        'ゆ' : ['yu'],
+        'よ' : ['yo']
+        },
+         
+        #9
+        {
+        'ら' : ['ra'],
+        'り' : ['ri'],
+        'る' : ['ru'],
+        'れ' : ['re'],
+        'ろ' : ['ro']
+        },
+        #10
+        {
+        'わ' : ['wa'],
+        'を' : ['wo']
+        },
+        #11
+        {
+        'きゃ' : ['kya'],
+        'きゅ' : ['kyu'],
+        'きょ' : ['kyo'],
+        'ぎゃ' : ['gya'],
+        'ぎゅ' : ['gyu'],
+        'ぎょ' : ['gyo'],
+        'しゃ' : ['sha','shya'],
+        'しゅ' : ['shu','shyu'],
+        'しょ' : ['sho','shyo'],
+        'じゃ' : ['jya'],
+        'じゅ' : ['jyu'],
+        'じょ' : ['jyo'],
+        'ちゃ' : ['cya','chya'],
+        'ちゅ' : ['cyu','chyu'],
+        'ちょ' : ['cyo','chyo'],
+        'ひゃ' : ['hya'],
+        'ひゅ' : ['hyu'],
+        'ひょ' : ['hyo'],
+        'びゃ' : ['bya'],
+        'びゅ' : ['byu'],
+        'びょ' : ['byo'],
+        'ぴゃ' : ['pya'],
+        'ぴゅ' : ['pyu'],
+        'ぴょ' : ['pyo'],
+        'みゃ' : ['mya'],
+        'みゅ' : ['myu'],
+        'みょ' : ['myo'],
+        'りゃ' : ['rya'],
+        'りゅ' : ['ryu'],
+        'りょ' : ['ryo']
+        }
+    }
+    #dictionary of katakana characters
+    "katakana":{
+        #1
+        {
+        'ア' : ['a'],
+        'イ' : ['i'],
+        'ウ' : ['u'],
+        'ヴ' : ['vu'],
+        'エ' : ['e'],
+        'オ' : ['o'],
+        'イェ' : ['ye','ixe'],
+        'ウィ' : ['wi','uxi'],
+        'ウェ' : ['we','uxe'],
+        'ウォ' : ['wo','uxo'],
+        'ヴァ' : ['va','vuxa'],
+        'ヴィ' : ['vi','vuxi'],
+        'ヴェ' : ['ve','vuxe'],
+        'ヴォ' : ['vo','vuxo'],
+        },
+        #2
+        {
+        'カ' : ['ka'],
+        'キ' : ['ki'],
+        'ク' : ['ku'],
+        'ケ' : ['ke'],
+        'コ' : ['ko'],
+        'ガ' : ['ga'],
+        'ギ' : ['gi'],
+        'グ' : ['gu'],
+        'ゲ' : ['ge'],
+        'ゴ' : ['go']
+        },
+        #3
+        {
+        'サ' : ['sa'],
+        'シ' : ['shi'],
+        'シェ' : ['she'],
+        'ス' : ['su'],
+        'セ' : ['se'],
+        'ソ' : ['so'],
+        'ザ' : ['za'],
+        'ジ' : ['ji'],
+        'ジェ' : ['jhe','je'],
+        'ズ' : ['zu'],
+        'ゼ' : ['ze'],
+        'ゾ' : ['zo'],
+        'ン' : ['n']
+        },
+        #4
+        {
+        'ハ' : ['ha'],
+        'ヒ' : ['hi'],
+        'ファ' : ['fa'],
+        'フィ' : ['fi'],
+        'フ' : ['fu'],
+        'フェ' : ['fe'],
+        'フォ' : ['fo'],
+        'ヘ' : ['he'],
+        'ホ' : ['ho'],
+        'バ' : ['ba'],
+        'ビ' : ['bi'],
+        'ブ' : ['bu'],
+        'ベ' : ['be'],
+        'ボ' : ['bo'],
+        'パ' : ['pa'],
+        'ピ' : ['pi'],
+        'プ' : ['pu'],
+        'ペ' : ['pe'],
+        'ポ' : ['po']
+        }
+    }
+}
+#used to display characters in english
+char_display_dict={
 'あ' : 'a',
 'い' : 'i',
 'う' : 'u',
@@ -264,119 +299,125 @@ char_dict={
 'を' : 'wo'
 }
 word_dict={
-'あい' : ['love'],
-'いう' : ['to say'],
-'あう' : ['to meet'],
-'おい' : ['hey'],
-'あおい' : ['blue'],
-'うえ' : ['on top'],
-'うお' : ['fish'],
-'いい' : ['good'],
-'いいえ' : ['no'],
-'ええ' : ['yes'],
-'おおい' : ['many'],
-'ああいう' : ['like that'],
-'かく' : ['to write'],
-'きく' : ['to listen'],
-'こく' : ['country'],
-'かき' : ['fire'],
-'かう' : ['to buy'],
-'かお　' : ['face'],
-'こい' : ['passion','carpfish','carp'],
-'おく' : ['back'],
-'えき' : ['station'],
-'いく' : ['to go'],
-'いき' : ['mood'],
-'あき' : ['autumn','fall'],
-'あく' : ['evil'],
-'あかい' : ['red'],
-'くい' : ['regret'],
-'あけ' : ['dawn'],
-'おきあい' : ['coast'],
-'かぎ' : ['key'],
-'かいぎ' : ['meeting'],
-'えがお' : ['smile'],
-'えいが' : ['movie'],
-'えいご' : ['english'],
-'ぐあい' : ['condition'],
-'かげ' : ['shadow'],
-'あかい　かあ' : ['red face'],
-'いい　えいが' : ['good movie'],
-'ああい　かげ' : ['blue shadow'],
-'すし' : ['sushi'],
-'あさ' : ['morning'],
-'かさ' : ['umbrella'],
-'せき' : ['cough'],
-'あかしい' : ['interesting'],
-'すぐ' : ['immediately'],
-'さ' : ['difference'],
-'いし' : ['stone'],
-'さがす' : ['to search'],
-'さすが' : ['as expected'],
-'おさけ' : ['sake'],
-'しかし' : ['however'],
-'すごい' : ['amazing'],
-'しあい' : ['competition'],
-'しずか' : ['silent'],
-'がくせい' : ['student'],
-'いそがしい' : ['busy'],
-'そあく' : ['crude'],
-'あそい' : ['late'],
-'せす' : ['to erase'],
-'さそう' : ['to invite'],
-'かえす' : ['to return'],
-'おす' : ['to push'],
-'くじ' : ['lottery'],
-'おさぎ' : ['rabbit'],
-'きし' : ['knight'],
-'しあ' : ['salt'],
-'すこし' : ['a little'],
-'さいせい' : ['playback'],
-'すぐ' : ['immediately'],
-'いしき' : ['consciousness'],
-'さがす' : ['to search'],
-'あかしい' : ['strange'],
-'すき' : ['like'],
-'しかく' : ['square'],
-'がくせい' : ['student'],
-'おんがく' : ['music'],
-'ぎんこう' : ['bank'],
-'こうえん' : ['park'],
-'がかん' : ['theatre'],
-'えいがかん' : ['movie theatre'],
-'せん' : ['thousand'],
-'あんしん' : ['relief'],
-'じしん' : ['confidence'],
-'おいしい' : ['delicious'],
-'おかしい' : ['strange'],
-'おかしい えがお' : ['strange smile'],
-'すごい　えいがかん' : ['amazing theatre'],
-'すぐ　いく' : ['going now'],
-'いそがしい　ぎんこう' : ['busy bank'],
-'さく' : ['to bloom'],
-'ぞう' :  ['elephant'],
-'おかし' : ['sweets'],
-'あおぞら' : ['blue sky'],
-'そおぞお' : ['imagination'],
-'こうこうせい' : ['high school student','highschool student'],
-'きあく' : ['memory'],
-'さいご' : ['last'],
-'くぎ' : ['hangnail','hang nail'],
-'ごご' : ['5pm'],
-'ここ' : ['moss'],
-'こげき' : ['comedy'],
-'けいこ' : [ "girl's name"],
-'かお' : ['face'],
-'いかが' : ['how are you?'],
-'きく' : ['chrysanthemum'],
-'かぐ' : ['furniture'],
-'がか' : ['painter'],
-'げき' : ['play'],
-'かいこ' : ['discharge'],
-'けいご' : ['honorific'],
-'ごかい' : ['misunderstanding'],
-'かがく' : ['science']
+"hiragana"{
+    'あい' : ['love'],
+    'いう' : ['to say'],
+    'あう' : ['to meet'],
+    'おい' : ['hey'],
+    'あおい' : ['blue'],
+    'うえ' : ['on top'],
+    'うお' : ['fish'],
+    'いい' : ['good'],
+    'いいえ' : ['no'],
+    'ええ' : ['yes'],
+    'おおい' : ['many'],
+    'ああいう' : ['like that'],
+    'かく' : ['to write'],
+    'きく' : ['to listen'],
+    'こく' : ['country'],
+    'かき' : ['fire'],
+    'かう' : ['to buy'],
+    'かお　' : ['face'],
+    'こい' : ['passion','carpfish','carp'],
+    'おく' : ['back'],
+    'えき' : ['station'],
+    'いく' : ['to go'],
+    'いき' : ['mood'],
+    'あき' : ['autumn','fall'],
+    'あく' : ['evil'],
+    'あかい' : ['red'],
+    'くい' : ['regret'],
+    'あけ' : ['dawn'],
+    'おきあい' : ['coast'],
+    'かぎ' : ['key'],
+    'かいぎ' : ['meeting'],
+    'えがお' : ['smile'],
+    'えいが' : ['movie'],
+    'えいご' : ['english'],
+    'ぐあい' : ['condition'],
+    'かげ' : ['shadow'],
+    'あかい　かあ' : ['red face'],
+    'いい　えいが' : ['good movie'],
+    'ああい　かげ' : ['blue shadow'],
+    'すし' : ['sushi'],
+    'あさ' : ['morning'],
+    'かさ' : ['umbrella'],
+    'せき' : ['cough'],
+    'あかしい' : ['interesting'],
+    'すぐ' : ['immediately'],
+    'さ' : ['difference'],
+    'いし' : ['stone'],
+    'さがす' : ['to search'],
+    'さすが' : ['as expected'],
+    'おさけ' : ['sake'],
+    'しかし' : ['however'],
+    'すごい' : ['amazing'],
+    'しあい' : ['competition'],
+    'しずか' : ['silent'],
+    'がくせい' : ['student'],
+    'いそがしい' : ['busy'],
+    'そあく' : ['crude'],
+    'あそい' : ['late'],
+    'せす' : ['to erase'],
+    'さそう' : ['to invite'],
+    'かえす' : ['to return'],
+    'おす' : ['to push'],
+    'くじ' : ['lottery'],
+    'おさぎ' : ['rabbit'],
+    'きし' : ['knight'],
+    'しあ' : ['salt'],
+    'すこし' : ['a little'],
+    'さいせい' : ['playback'],
+    'すぐ' : ['immediately'],
+    'いしき' : ['consciousness'],
+    'さがす' : ['to search'],
+    'あかしい' : ['strange'],
+    'すき' : ['like'],
+    'しかく' : ['square'],
+    'がくせい' : ['student'],
+    'おんがく' : ['music'],
+    'ぎんこう' : ['bank'],
+    'こうえん' : ['park'],
+    'がかん' : ['theatre'],
+    'えいがかん' : ['movie theatre'],
+    'せん' : ['thousand'],
+    'あんしん' : ['relief'],
+    'じしん' : ['confidence'],
+    'おいしい' : ['delicious'],
+    'おかしい' : ['strange'],
+    'おかしい えがお' : ['strange smile'],
+    'すごい　えいがかん' : ['amazing theatre'],
+    'すぐ　いく' : ['going now'],
+    'いそがしい　ぎんこう' : ['busy bank'],
+    'さく' : ['to bloom'],
+    'ぞう' :  ['elephant'],
+    'おかし' : ['sweets'],
+    'あおぞら' : ['blue sky'],
+    'そおぞお' : ['imagination'],
+    'こうこうせい' : ['high school student','highschool student'],
+    'きあく' : ['memory'],
+    'さいご' : ['last'],
+    'くぎ' : ['hangnail','hang nail'],
+    'ごご' : ['5pm'],
+    'ここ' : ['moss'],
+    'こげき' : ['comedy'],
+    'けいこ' : [ "girl's name"],
+    'かお' : ['face'],
+    'いかが' : ['how are you?'],
+    'きく' : ['chrysanthemum'],
+    'かぐ' : ['furniture'],
+    'がか' : ['painter'],
+    'げき' : ['play'],
+    'かいこ' : ['discharge'],
+    'けいご' : ['honorific'],
+    'ごかい' : ['misunderstanding'],
+    'かがく' : ['science']
+    }
+    #$ ???
+    "katakana":{
+    }
 }
+#$ this is only for saving during the session? i save after everything cuz i usually close the program forcibly
 session_char_list=[
 #1
 {'あ' : [0],
@@ -458,6 +499,7 @@ session_char_list=[
 'る' : [0],
 'れ' : [0],
 'ろ' : [0]},
+#$ lol nice regex under here man XD
 #1[0]
 {'わ' : [0],
 'を' : [0]},
@@ -493,6 +535,7 @@ session_char_list=[
 'りゅ' : [0],
 'りょ' : [0]}
 ]
+#$ this actually has no usage in the code whats this used for
 dir_dict={
 '1' : ['vowels'],
 '2' : ['k'],
@@ -510,15 +553,17 @@ dir_dict={
 '14' : ['katakana n']
 '15' : ['katakana h']
 }
+#use this for the save
 save_buffer={}
+#name of the file in which the save data is stored
 filename=".save.json"
 
 def save():
     global save_buffer
     global filename
     with open(filename,"w",encoding="utf8") as lmao:
+#^ will have to change this a bit by using the .get method
         lmao.write(json.dumps(save_buffer))
-
 def load():
     global save_buffer
     global filename
@@ -541,6 +586,7 @@ def load():
 if not load():
     sys.exit()
 c=int(input("Mode(1=character recognition,2=word recognition),3=Character Full List:"))
+#^ will clean this up next commit
 if c == 1:
     a=int(input("Number (katakana starts at 12):"))
     d=int(input("Just that group? 1 for yes 2 for no "))
@@ -607,6 +653,7 @@ elif c == 2:
             print("Bad " + str(word_list))
         save_buffer["words_number"]+=1
         save()
+#$ wtf is this used for, doesnt work in previous commit
 elif c == 3:
         session_finish = False
         group_number=random.randint(0,10)
