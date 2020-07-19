@@ -9,8 +9,6 @@
 
 # #$ things picky needs to check
 # #^ things randomguy needs to check
-                                                       
-                                
 import random
 import json
 import sys
@@ -18,6 +16,7 @@ import time
 char_dict={
     #dictionary of hiragana characters
     "hiragana":{
+        #1
         {
         'あ' : ['a'],
         'い' : ['i'],
@@ -157,8 +156,7 @@ char_dict={
     #dictionary of katakana characters
     "katakana":{
         #1
-        {
-        'ア' : ['a'],
+        {'ア' : ['a'],
         'イ' : ['i'],
         'ウ' : ['u'],
         'ヴ' : ['vu'],
@@ -171,11 +169,9 @@ char_dict={
         'ヴァ' : ['va','vuxa'],
         'ヴィ' : ['vi','vuxi'],
         'ヴェ' : ['ve','vuxe'],
-        'ヴォ' : ['vo','vuxo'],
-        },
+        'ヴォ' : ['vo','vuxo']},
         #2
-        {
-        'カ' : ['ka'],
+        {'カ' : ['ka'],
         'キ' : ['ki'],
         'ク' : ['ku'],
         'ケ' : ['ke'],
@@ -184,11 +180,9 @@ char_dict={
         'ギ' : ['gi'],
         'グ' : ['gu'],
         'ゲ' : ['ge'],
-        'ゴ' : ['go']
-        },
+        'ゴ' : ['go']},
         #3
-        {
-        'サ' : ['sa'],
+        {'サ' : ['sa'],
         'シ' : ['shi'],
         'シェ' : ['she'],
         'ス' : ['su'],
@@ -200,11 +194,32 @@ char_dict={
         'ズ' : ['zu'],
         'ゼ' : ['ze'],
         'ゾ' : ['zo'],
-        'ン' : ['n']
-        },
+        'ン' : ['n']},
         #4
-        {
-        'ハ' : ['ha'],
+        {'タ' : ['ta'],
+        'チ' : ['chi'],
+        'チェ' : ['chixe','che'],
+        'ツ' : ['tsu'],
+        'ッ' : ['xtsu'],
+        'テ' : ['te'],
+        'ティ' : ['ti','texe'],
+        'ト' : ['to'],
+        'トゥ' : ['tu','toxe'],
+        'ダ' : ['da'],
+        'ヂ' : ['di','ji','jhi'],
+        'ヅ' : ['du','tzu','zu'],
+        'デ' : ['de'],
+        'ディ' : ['di','dixe'],
+        'ド' : ['do'],
+        'ドゥ' : ['du','duxe']},
+        #5
+        {'ナ' : ['na'],
+        'ニ' : ['ni'],
+        'ヌ' : ['nu'],
+        'ネ' : ['ne'],
+        'ノ' : ['no']},
+        #6
+        {'ハ' : ['ha'],
         'ヒ' : ['hi'],
         'ファ' : ['fa'],
         'フィ' : ['fi'],
@@ -222,8 +237,58 @@ char_dict={
         'ピ' : ['pi'],
         'プ' : ['pu'],
         'ペ' : ['pe'],
-        'ポ' : ['po']
-        }
+        'ポ' : ['po']},
+        #7
+        {'マ' : ['ma'],
+        'ミ' : ['mi'],
+        'ム' : ['mu'],
+        'メ' : ['me'],
+        'モ' : ['mo']},
+        #8
+        {'ヤ' : ['ya'],
+        'ユ' : ['yu'],
+        'ヨ' : ['yo']},
+         
+        #9
+        {'ラ' : ['ra'],
+        'リ' : ['ri'],
+        'ル' : ['ru'],
+        'レ' : ['re'],
+        'ロ' : ['ro']},
+        #10
+        {'ワ' : ['wa'],
+        'ヲ' : ['wo']},
+        #11
+        {'キャ' : ['kya'],
+        'キュ' : ['kyu'],
+        'キョ' : ['kyo'],
+        'ギャ' : ['gya'],
+        'ギュ' : ['gyu'],
+        'ギョ' : ['gyo'],
+        'シャ' : ['sha','shya'],
+        'シュ' : ['shu','shyu'],
+        'ショ' : ['sho','shyo'],
+        'ジャ' : ['jya'],
+        'ジュ' : ['jyu'],
+        'ジョ' : ['jyo'],
+        'チャ' : ['cya','chya'],
+        'チュ' : ['cyu','chyu'],
+        'チョ' : ['cyo','chyo'],
+        'ヒャ' : ['hya'],
+        'ヒュ' : ['hyu'],
+        'ヒョ' : ['hyo'],
+        'ビャ' : ['bya'],
+        'ビュ' : ['byu'],
+        'ビョ' : ['byo'],
+        'ピャ' : ['pya'],
+        'ピュ' : ['pyu'],
+        'ピョ' : ['pyo'],
+        'ミャ' : ['mya'],
+        'ミュ' : ['myu'],
+        'ミョ' : ['myo'],
+        'リャ' : ['rya'],
+        'リュ' : ['ryu'],
+        'リョ' : ['ryo']}
     }
 }
 #used to display characters in english
@@ -426,17 +491,7 @@ session_char_list=[
 'い' : [0],
 'う' : [0],
 'え' : [0],
-              
 'お' : [0]},
-                        
-                        
-                        
-                        
-                         
-                         
-                         
-                         
-  
 #2
 {'か' : [0],
 'き' : [0],
@@ -457,11 +512,9 @@ session_char_list=[
 'ざ' : [0],
 'じ' : [0],
 'ず' : [0],
-                        
 'ぜ' : [0],
 'ぞ' : [0],
 'ん' : [0]},
-               
 #4
 {'た' : [0],
 'ち' : [0],
@@ -474,11 +527,6 @@ session_char_list=[
 'づ' : [0],
 'で' : [0],
 'ど' : [0]},
-                          
-               
-                         
-               
-                          
 #5
 {'な' : [0],
 'に' : [0],
@@ -501,10 +549,6 @@ session_char_list=[
 'ぷ' : [0],
 'ぺ' : [0],
 'ぽ' : [0]},
-               
-               
-               
-                
 #7
 {'ま' : [0],
 'み' : [0],
@@ -559,120 +603,6 @@ session_char_list=[
 'りょ' : [0]}
 ]
 #$ this actually has no usage in the code whats this used for
-           
-                    
-                      
-                       
-                   
-                       
-                      
-                    
-                    
-                     
-                   
-                       
-                               
-                        
-                         
-                       
-                    
-                      
-                       
-                                         
-                    
-                       
-                     
-                    
-                             
-                    
-                      
-                      
-                    
-                           
-                   
-                          
-                        
-                        
-                          
-                            
-                      
-                                    
-                                      
-                                       
-                     
-                       
-                        
-                     
-                                 
-                           
-                       
-                     
-                            
-                              
-                       
-                          
-                          
-                              
-                         
-                             
-                             
-                        
-                       
-                        
-                            
-                            
-                       
-                       
-                         
-                      
-                    
-                           
-                              
-                           
-                                
-                            
-                             
-                    
-                         
-                             
-                           
-                          
-                          
-                          
-                                      
-                        
-                            
-                             
-                               
-                             
-                                             
-                                                    
-                                  
-                                                 
-                        
-                         
-                         
-                              
-                                 
-                                                                    
-                         
-                       
-                                    
-                   
-                    
-                         
-                               
-                    
-                               
-                             
-                         
-                       
-                    
-                            
-                            
-                                   
-                         
- 
 dir_dict={
 '1' : ['vowels'],
 '2' : ['k'],
@@ -701,7 +631,6 @@ def save():
     with open(filename,"w",encoding="utf8") as lmao:
 #^ will have to change this a bit by using the .get method
         lmao.write(json.dumps(save_buffer))
-
 def load():
     global save_buffer
     global filename
