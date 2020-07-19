@@ -1,5 +1,6 @@
 """version 1.3
 
+1.4: finished all katakana, added correct streaks
 1.3: added h column
 1.2: added n column
 1.1: various improvements, added dir, added to t column
@@ -23,8 +24,7 @@ char_list=[
 'ヴァ' : ['va','vuxa'],
 'ヴィ' : ['vi','vuxi'],
 'ヴェ' : ['ve','vuxe'],
-'ヴォ' : ['vo','vuxo'],
-},
+'ヴォ' : ['vo','vuxo']},
 #2
 {'カ' : ['ka'],
 'キ' : ['ki'],
@@ -126,9 +126,9 @@ char_list=[
 'ジャ' : ['jya'],
 'ジュ' : ['jyu'],
 'ジョ' : ['jyo'],
-'チャ' : ['cya','chya'],
-'チュ' : ['cyu','chyu'],
-'チョ' : ['cyo','chyo'],
+'チャ' : ['cya','chya','cha'],
+'チュ' : ['cyu','chyu','chu'],
+'チョ' : ['cyo','chyo','cho'],
 'ヒャ' : ['hya'],
 'ヒュ' : ['hyu'],
 'ヒョ' : ['hyo'],
@@ -271,7 +271,7 @@ dir_dict={
 '8' : ['y'],
 '9' : ['r'],
 '10' : ['w'],
-'11' : ['??']
+'11' : ['y diagraphs']
 }
 save_buffer={}
 filename=".save.json"
@@ -313,6 +313,7 @@ if c == 1:
             a=int(a)
             break
     d=int(input("Just that group? 1 for yes and 2 for no\n>"))
+    streak = 0
     while True:
         if d == 1:
             group_number= int(a-1)
@@ -336,14 +337,18 @@ if c == 1:
             else:
                 l["right_guesses"][b]=1
             l["right"]+=1
+            streak = streak + 1
             print("Correct " + str(character_list))
+            if streak % 10 == 0:
+                print("Streak: " + str(streak))
         else:
             if b in l["wrong_guesses"].keys():
                 l["wrong_guesses"][b]+=1
             else:
                 l["wrong_guesses"][b]=1
             l["wrong"]+=1
-            print("WRONG " + str(character_list))
+            print("WRONG " + str(character_list) + "\nStreak: " + str(streak))
+            streak = 0
         save_buffer["chars_number"]+=1
         save()
 elif c == 2:
