@@ -663,6 +663,7 @@ if c == 1:
             a=int(a)
             break
     d=int(input("Just that group? 1 for yes and 2 for no\n>"))
+    streak = 0          
     while True:
         if d == 1:
             group_number= int(a-1)
@@ -686,14 +687,18 @@ if c == 1:
             else:
                 l["right_guesses"][b]=1
             l["right"]+=1
+            streak = streak + 1                 
             print("Correct " + str(character_list))
+            if streak % 10 == 0:
+                print("Streak: " + str(streak))                                             
         else:
             if b in l["wrong_guesses"].keys():
                 l["wrong_guesses"][b]+=1
             else:
                 l["wrong_guesses"][b]=1
             l["wrong"]+=1
-            print("WRONG " + str(character_list))
+            print("WRONG " + str(character_list) + "\nStreak: " + str(streak))
+            streak = 0        
         save_buffer["chars_number"]+=1
         save()
 elif c == 2:
