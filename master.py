@@ -15,8 +15,7 @@ import sys
 import time
 char_dict={
     #dictionary of hiragana characters
-    "hiragana":{
-        #1
+    "hiragana":[
         {
         'あ' : ['a'],
         'い' : ['i'],
@@ -152,11 +151,12 @@ char_dict={
         'りゅ' : ['ryu'],
         'りょ' : ['ryo']
         }
-    }
+    ],
     #dictionary of katakana characters
-    "katakana":{
+    "katakana":[
         #1
-        {'ア' : ['a'],
+        {
+        'ア' : ['a'],
         'イ' : ['i'],
         'ウ' : ['u'],
         'ヴ' : ['vu'],
@@ -169,9 +169,11 @@ char_dict={
         'ヴァ' : ['va','vuxa'],
         'ヴィ' : ['vi','vuxi'],
         'ヴェ' : ['ve','vuxe'],
-        'ヴォ' : ['vo','vuxo']},
+        'ヴォ' : ['vo','vuxo'],
+        },
         #2
-        {'カ' : ['ka'],
+        {
+        'カ' : ['ka'],
         'キ' : ['ki'],
         'ク' : ['ku'],
         'ケ' : ['ke'],
@@ -180,9 +182,11 @@ char_dict={
         'ギ' : ['gi'],
         'グ' : ['gu'],
         'ゲ' : ['ge'],
-        'ゴ' : ['go']},
+        'ゴ' : ['go']
+        },
         #3
-        {'サ' : ['sa'],
+        {
+        'サ' : ['sa'],
         'シ' : ['shi'],
         'シェ' : ['she'],
         'ス' : ['su'],
@@ -194,32 +198,11 @@ char_dict={
         'ズ' : ['zu'],
         'ゼ' : ['ze'],
         'ゾ' : ['zo'],
-        'ン' : ['n']},
+        'ン' : ['n']
+        },
         #4
-        {'タ' : ['ta'],
-        'チ' : ['chi'],
-        'チェ' : ['chixe','che'],
-        'ツ' : ['tsu'],
-        'ッ' : ['xtsu'],
-        'テ' : ['te'],
-        'ティ' : ['ti','texe'],
-        'ト' : ['to'],
-        'トゥ' : ['tu','toxe'],
-        'ダ' : ['da'],
-        'ヂ' : ['di','ji','jhi'],
-        'ヅ' : ['du','tzu','zu'],
-        'デ' : ['de'],
-        'ディ' : ['di','dixe'],
-        'ド' : ['do'],
-        'ドゥ' : ['du','duxe']},
-        #5
-        {'ナ' : ['na'],
-        'ニ' : ['ni'],
-        'ヌ' : ['nu'],
-        'ネ' : ['ne'],
-        'ノ' : ['no']},
-        #6
-        {'ハ' : ['ha'],
+        {
+        'ハ' : ['ha'],
         'ヒ' : ['hi'],
         'ファ' : ['fa'],
         'フィ' : ['fi'],
@@ -237,59 +220,9 @@ char_dict={
         'ピ' : ['pi'],
         'プ' : ['pu'],
         'ペ' : ['pe'],
-        'ポ' : ['po']},
-        #7
-        {'マ' : ['ma'],
-        'ミ' : ['mi'],
-        'ム' : ['mu'],
-        'メ' : ['me'],
-        'モ' : ['mo']},
-        #8
-        {'ヤ' : ['ya'],
-        'ユ' : ['yu'],
-        'ヨ' : ['yo']},
-         
-        #9
-        {'ラ' : ['ra'],
-        'リ' : ['ri'],
-        'ル' : ['ru'],
-        'レ' : ['re'],
-        'ロ' : ['ro']},
-        #10
-        {'ワ' : ['wa'],
-        'ヲ' : ['wo']},
-        #11
-        {'キャ' : ['kya'],
-        'キュ' : ['kyu'],
-        'キョ' : ['kyo'],
-        'ギャ' : ['gya'],
-        'ギュ' : ['gyu'],
-        'ギョ' : ['gyo'],
-        'シャ' : ['sha','shya'],
-        'シュ' : ['shu','shyu'],
-        'ショ' : ['sho','shyo'],
-        'ジャ' : ['jya'],
-        'ジュ' : ['jyu'],
-        'ジョ' : ['jyo'],
-        'チャ' : ['cya','chya'],
-        'チュ' : ['cyu','chyu'],
-        'チョ' : ['cyo','chyo'],
-        'ヒャ' : ['hya'],
-        'ヒュ' : ['hyu'],
-        'ヒョ' : ['hyo'],
-        'ビャ' : ['bya'],
-        'ビュ' : ['byu'],
-        'ビョ' : ['byo'],
-        'ピャ' : ['pya'],
-        'ピュ' : ['pyu'],
-        'ピョ' : ['pyo'],
-        'ミャ' : ['mya'],
-        'ミュ' : ['myu'],
-        'ミョ' : ['myo'],
-        'リャ' : ['rya'],
-        'リュ' : ['ryu'],
-        'リョ' : ['ryo']}
-    }
+        'ポ' : ['po']
+        }
+    ]
 }
 #used to display characters in english
 char_display_dict={
@@ -366,7 +299,7 @@ char_display_dict={
 'を' : 'wo'
 }
 word_dict={
-"hiragana"{
+"hiragana":{
     'あい' : ['love'],
     'いう' : ['to say'],
     'あう' : ['to meet'],
@@ -479,7 +412,7 @@ word_dict={
     'けいご' : ['honorific'],
     'ごかい' : ['misunderstanding'],
     'かがく' : ['science']
-    }
+    },
     #$ ???
     "katakana":{
     }
@@ -603,23 +536,23 @@ session_char_list=[
 'りょ' : [0]}
 ]
 #$ this actually has no usage in the code whats this used for
-dir_dict={
-'1' : ['vowels'],
-'2' : ['k'],
-'3' : ['s'],
-'4' : ['t'],
-'5' : ['n'],
-'6' : ['h'],
-'7' : ['m'],
-'8' : ['y'],
-'9' : ['r'],
-'10' : ['w'],
-'11' : ['katakana vowels']
-'12' : ['katakana k']
-'13' : ['katakana t']
-'14' : ['katakana n']
-'15' : ['katakana h']
-}
+# dir_dict={
+# '1' : ['vowels'],
+# '2' : ['k'],
+# '3' : ['s'],
+# '4' : ['t'],
+# '5' : ['n'],
+# '6' : ['h'],
+# '7' : ['m'],
+# '8' : ['y'],
+# '9' : ['r'],
+# '10' : ['w'],
+# '11' : ['katakana vowels']
+# '12' : ['katakana k']
+# '13' : ['katakana t']
+# '14' : ['katakana n']
+# '15' : ['katakana h']
+# }
 #use this for the save
 save_buffer={}
 #name of the file in which the save data is stored
@@ -637,7 +570,12 @@ def load():
     with open(filename,"a+",encoding="utf8") as lmao:
         lmao.seek(0,2)
         if lmao.tell() == 0:
-            save_buffer={"chars":{},"words":{},"chars_number":0,"words_number":0}
+            save_buffer={
+            "chars":{},
+            "words":{},
+            "chars_number":0,
+            "words_number":0,
+            }
             lmao.write(json.dumps(save_buffer))
             return 1
         else:
@@ -652,31 +590,24 @@ def load():
 
 if not load():
     sys.exit()
-c=int(input("Mode(1=character recognition,2=word recognition,3=Character Full List)\n>"))
+c=int(input("Mode(1=character recognition,2=word recognition),3=Character Full List:"))
 #^ will clean this up next commit
 if c == 1:
-    while True:
-        a=input("Column Number (type dir for directory)\n>")
-        if a == "dir":
-            print(dir_dict)
-        else:
-            a=int(a)
-            break
-    d=int(input("Just that group? 1 for yes and 2 for no\n>"))
-    streak = 0          
+    a=int(input("Number (katakana starts at 12):"))
+    d=int(input("Just that group? 1 for yes 2 for no "))
     while True:
         if d == 1:
-            group_number= int(a-1)
+            group_number= a-1
         else:
             group_number=random.randint(0,a-1)
-        random_key=random.choice(list(char_list[group_number]))
-        character_list=char_list[group_number][random_key]
+        random_key=random.choice(list(char_dict["hiragana"][group_number]))
+        character_list=char_dict["hiragana"][group_number][random_key]
         if random_key not in save_buffer["chars"].keys():
             save_buffer["chars"][random_key]={"right":0,"wrong":0,"right_guesses":{},"wrong_guesses":{},"average_time":0,"times":[]}
         l=save_buffer["chars"][random_key]
         print(random_key)
         time_start=time.time()
-        b=input(">")
+        b=input()
         time_end=time.time()
         answer_time=time_end-time_start
         l["times"].append(answer_time)
@@ -687,30 +618,26 @@ if c == 1:
             else:
                 l["right_guesses"][b]=1
             l["right"]+=1
-            streak = streak + 1                 
-            print("Correct " + str(character_list))
-            if streak % 10 == 0:
-                print("Streak: " + str(streak))                                             
+            print("Good")
         else:
             if b in l["wrong_guesses"].keys():
                 l["wrong_guesses"][b]+=1
             else:
                 l["wrong_guesses"][b]=1
             l["wrong"]+=1
-            print("WRONG " + str(character_list) + "\nStreak: " + str(streak))
-            streak = 0        
+            print("Bad " + str(character_list))
         save_buffer["chars_number"]+=1
         save()
 elif c == 2:
     while True:
-        random_key=random.choice(list(word_dict))
-        word_list=word_dict[random_key]
+        random_key=random.choice(list(word_dict["hiragana"]))
+        word_list=word_dict["hiragana"][random_key]
         if random_key not in save_buffer["words"].keys():
             save_buffer["words"][random_key]={"right":0,"wrong":0,"right_guesses":{},"wrong_guesses":{},"average_time":0,"times":[]}
         l=save_buffer["words"][random_key]
         print(random_key)
         time_start=time.time()
-        b=input(">")
+        b=input()
         time_end=time.time()
         answer_time=time_end-time_start
         l["times"].append(answer_time)
@@ -721,14 +648,14 @@ elif c == 2:
             else:
                 l["right_guesses"][b]=1
             l["right"]+=1
-            print("Correct " + str(word_list))
+            print("Good")
         else:
             if b in l["wrong_guesses"].keys():
                 l["wrong_guesses"][b]+=1
             else:
                 l["wrong_guesses"][b]=1
             l["wrong"]+=1
-            print("WRONG " + str(word_list))
+            print("Bad " + str(word_list))
         save_buffer["words_number"]+=1
         save()
 #$ wtf is this used for, doesnt work in previous commit
