@@ -13,546 +13,7 @@ import random
 import json
 import sys
 import time
-char_dict={
-    #dictionary of hiragana characters
-    "hiragana":[
-        {
-        'あ' : ['a'],
-        'い' : ['i'],
-        'う' : ['u'],
-        'え' : ['e'],
-        'お' : ['o']
-        },
-        #2
-        {
-        'か' : ['ka'],
-        'き' : ['ki'],
-        'く' : ['ku'],
-        'け' : ['ke'],
-        'こ' : ['ko'],
-        'が' : ['ga'],
-        'ぎ' : ['gi'],
-        'ぐ' : ['gu'],
-        'げ' : ['ge'],
-        'ご' : ['go']
-        },
-        #3
-        {
-        'さ' : ['sa'],
-        'し' : ['shi'],
-        'す' : ['su'],
-        'せ' : ['se'],
-        'そ' : ['so'],
-        'ざ' : ['za'],
-        'じ' : ['ji'],
-        'ず' : ['zu'],
-        'ぜ' : ['ze'],
-        'ぞ' : ['zo'],
-        'ん' : ['n']
-        },
-        #4
-        {
-        'た' : ['ta'],
-        'ち' : ['chi'],
-        'つ' : ['tsu'],
-        'っ' : ['xtsu'],
-        'て' : ['te'],
-        'と' : ['to'],
-        'だ' : ['da'],
-        'ぢ' : ['di','ji','jhi'],
-        'づ' : ['du'],
-        'で' : ['de'],
-        'ど' : ['do']
-        },
-        #5
-        {
-        'な' : ['na'],
-        'に' : ['ni'],
-        'ぬ' : ['nu'],
-        'ね' : ['ne'],
-        'の' : ['no']
-        },
-        #6
-        {
-        'は' : ['ha'],
-        'ひ' : ['hi'],
-        'ふ' : ['fu'],
-        'へ' : ['he'],
-        'ほ' : ['ho'],
-        'ば' : ['ba'],
-        'び' : ['bi'],
-        'ぶ' : ['bu'],
-        'べ' : ['be'],
-        'ぼ' : ['bo'],
-        'ぱ' : ['pa'],
-        'ぴ' : ['pi'],
-        'ぷ' : ['pu'],
-        'ぺ' : ['pe'],
-        'ぽ' : ['po']
-        },
-        #7
-        {
-        'ま' : ['ma'],
-        'み' : ['mi'],
-        'む' : ['mu'],
-        'め' : ['me'],
-        'も' : ['mo']
-        },
-        #8
-        {
-        'や' : ['ya'],
-        'ゆ' : ['yu'],
-        'よ' : ['yo']
-        },
-         
-        #9
-        {
-        'ら' : ['ra'],
-        'り' : ['ri'],
-        'る' : ['ru'],
-        'れ' : ['re'],
-        'ろ' : ['ro']
-        },
-        #10
-        {
-        'わ' : ['wa'],
-        'を' : ['wo']
-        },
-        #11
-        {
-        'きゃ' : ['kya'],
-        'きゅ' : ['kyu'],
-        'きょ' : ['kyo'],
-        'ぎゃ' : ['gya'],
-        'ぎゅ' : ['gyu'],
-        'ぎょ' : ['gyo'],
-        'しゃ' : ['sha','shya'],
-        'しゅ' : ['shu','shyu'],
-        'しょ' : ['sho','shyo'],
-        'じゃ' : ['jya'],
-        'じゅ' : ['jyu'],
-        'じょ' : ['jyo'],
-        'ちゃ' : ['cya','chya'],
-        'ちゅ' : ['cyu','chyu'],
-        'ちょ' : ['cyo','chyo'],
-        'ひゃ' : ['hya'],
-        'ひゅ' : ['hyu'],
-        'ひょ' : ['hyo'],
-        'びゃ' : ['bya'],
-        'びゅ' : ['byu'],
-        'びょ' : ['byo'],
-        'ぴゃ' : ['pya'],
-        'ぴゅ' : ['pyu'],
-        'ぴょ' : ['pyo'],
-        'みゃ' : ['mya'],
-        'みゅ' : ['myu'],
-        'みょ' : ['myo'],
-        'りゃ' : ['rya'],
-        'りゅ' : ['ryu'],
-        'りょ' : ['ryo']
-        }
-    ],
-    #dictionary of katakana characters
-    "katakana":[
-        #1
-        {
-        'ア' : ['a'],
-        'イ' : ['i'],
-        'ウ' : ['u'],
-        'ヴ' : ['vu'],
-        'エ' : ['e'],
-        'オ' : ['o'],
-        'イェ' : ['ye','ixe'],
-        'ウィ' : ['wi','uxi'],
-        'ウェ' : ['we','uxe'],
-        'ウォ' : ['wo','uxo'],
-        'ヴァ' : ['va','vuxa'],
-        'ヴィ' : ['vi','vuxi'],
-        'ヴェ' : ['ve','vuxe'],
-        'ヴォ' : ['vo','vuxo'],
-        },
-        #2
-        {
-        'カ' : ['ka'],
-        'キ' : ['ki'],
-        'ク' : ['ku'],
-        'ケ' : ['ke'],
-        'コ' : ['ko'],
-        'ガ' : ['ga'],
-        'ギ' : ['gi'],
-        'グ' : ['gu'],
-        'ゲ' : ['ge'],
-        'ゴ' : ['go']
-        },
-        #3
-        {
-        'サ' : ['sa'],
-        'シ' : ['shi'],
-        'シェ' : ['she'],
-        'ス' : ['su'],
-        'セ' : ['se'],
-        'ソ' : ['so'],
-        'ザ' : ['za'],
-        'ジ' : ['ji'],
-        'ジェ' : ['jhe','je'],
-        'ズ' : ['zu'],
-        'ゼ' : ['ze'],
-        'ゾ' : ['zo'],
-        'ン' : ['n']
-        },
-        #4
-        {
-        'ハ' : ['ha'],
-        'ヒ' : ['hi'],
-        'ファ' : ['fa'],
-        'フィ' : ['fi'],
-        'フ' : ['fu'],
-        'フェ' : ['fe'],
-        'フォ' : ['fo'],
-        'ヘ' : ['he'],
-        'ホ' : ['ho'],
-        'バ' : ['ba'],
-        'ビ' : ['bi'],
-        'ブ' : ['bu'],
-        'ベ' : ['be'],
-        'ボ' : ['bo'],
-        'パ' : ['pa'],
-        'ピ' : ['pi'],
-        'プ' : ['pu'],
-        'ペ' : ['pe'],
-        'ポ' : ['po']
-        }
-    ]
-}
-#used to display characters in english
-char_display_dict={
-'あ' : 'a',
-'い' : 'i',
-'う' : 'u',
-'え' : 'e',
-'お' : 'o',
-'か' : 'ka',
-'き' : 'ki',
-'く' : 'ku',
-'け' : 'ke',
-'こ' : 'ko',
-'が' : 'ga',
-'ぎ' : 'gi',
-'ぐ' : 'gu',
-'げ' : 'ge',
-'ご' : 'go',
-'さ' : 'sa',
-'し' : 'shi',
-'す' : 'su',
-'せ' : 'se',
-'そ' : 'so',
-'ざ' : 'za',
-'じ' : 'ji',
-'ず' : 'zu',
-'ぜ' : 'ze',
-'ぞ' : 'zo',
-'ん' : 'n',
-'た' : 'ta',
-'ち' : 'chi',
-'つ' : 'tsu',
-'て' : 'te',
-'と' : 'to',
-'だ' : 'da',
-'ぢ' : 'di',
-'づ' : 'du',
-'で' : 'de',
-'ど' : 'do',
-'な' : 'na',
-'に' : 'ni',
-'ぬ' : 'nu',
-'ね' : 'ne',
-'の' : 'no',
-'は' : 'ha',
-'ひ' : 'hi',
-'ふ' : 'fu',
-'へ' : 'he',
-'ほ' : 'ho',
-'ば' : 'ba',
-'び' : 'bi',
-'ぶ' : 'bu',
-'べ' : 'be',
-'ぼ' : 'bo',
-'ぱ' : 'pa',
-'ぴ' : 'pi',
-'ぷ' : 'pu',
-'ぺ' : 'pe',
-'ぽ' : 'po',
-'ま' : 'ma',
-'み' : 'mi',
-'む' : 'mu',
-'め' : 'me',
-'も' : 'mo',
-'や' : 'ya',
-'ゆ' : 'yu',
-'よ' : 'yo',
-'ら' : 'ra',
-'り' : 'ri',
-'る' : 'ru',
-'れ' : 're',
-'ろ' : 'ro',
-'わ' : 'wa',
-'を' : 'wo'
-}
-word_dict={
-"hiragana":{
-    'あい' : ['love'],
-    'いう' : ['to say'],
-    'あう' : ['to meet'],
-    'おい' : ['hey'],
-    'あおい' : ['blue'],
-    'うえ' : ['on top'],
-    'うお' : ['fish'],
-    'いい' : ['good'],
-    'いいえ' : ['no'],
-    'ええ' : ['yes'],
-    'おおい' : ['many'],
-    'ああいう' : ['like that'],
-    'かく' : ['to write'],
-    'きく' : ['to listen'],
-    'こく' : ['country'],
-    'かき' : ['fire'],
-    'かう' : ['to buy'],
-    'かお　' : ['face'],
-    'こい' : ['passion','carpfish','carp'],
-    'おく' : ['back'],
-    'えき' : ['station'],
-    'いく' : ['to go'],
-    'いき' : ['mood'],
-    'あき' : ['autumn','fall'],
-    'あく' : ['evil'],
-    'あかい' : ['red'],
-    'くい' : ['regret'],
-    'あけ' : ['dawn'],
-    'おきあい' : ['coast'],
-    'かぎ' : ['key'],
-    'かいぎ' : ['meeting'],
-    'えがお' : ['smile'],
-    'えいが' : ['movie'],
-    'えいご' : ['english'],
-    'ぐあい' : ['condition'],
-    'かげ' : ['shadow'],
-    'あかい　かあ' : ['red face'],
-    'いい　えいが' : ['good movie'],
-    'ああい　かげ' : ['blue shadow'],
-    'すし' : ['sushi'],
-    'あさ' : ['morning'],
-    'かさ' : ['umbrella'],
-    'せき' : ['cough'],
-    'あかしい' : ['interesting'],
-    'すぐ' : ['immediately'],
-    'さ' : ['difference'],
-    'いし' : ['stone'],
-    'さがす' : ['to search'],
-    'さすが' : ['as expected'],
-    'おさけ' : ['sake'],
-    'しかし' : ['however'],
-    'すごい' : ['amazing'],
-    'しあい' : ['competition'],
-    'しずか' : ['silent'],
-    'がくせい' : ['student'],
-    'いそがしい' : ['busy'],
-    'そあく' : ['crude'],
-    'あそい' : ['late'],
-    'せす' : ['to erase'],
-    'さそう' : ['to invite'],
-    'かえす' : ['to return'],
-    'おす' : ['to push'],
-    'くじ' : ['lottery'],
-    'おさぎ' : ['rabbit'],
-    'きし' : ['knight'],
-    'しあ' : ['salt'],
-    'すこし' : ['a little'],
-    'さいせい' : ['playback'],
-    'すぐ' : ['immediately'],
-    'いしき' : ['consciousness'],
-    'さがす' : ['to search'],
-    'あかしい' : ['strange'],
-    'すき' : ['like'],
-    'しかく' : ['square'],
-    'がくせい' : ['student'],
-    'おんがく' : ['music'],
-    'ぎんこう' : ['bank'],
-    'こうえん' : ['park'],
-    'がかん' : ['theatre'],
-    'えいがかん' : ['movie theatre'],
-    'せん' : ['thousand'],
-    'あんしん' : ['relief'],
-    'じしん' : ['confidence'],
-    'おいしい' : ['delicious'],
-    'おかしい' : ['strange'],
-    'おかしい えがお' : ['strange smile'],
-    'すごい　えいがかん' : ['amazing theatre'],
-    'すぐ　いく' : ['going now'],
-    'いそがしい　ぎんこう' : ['busy bank'],
-    'さく' : ['to bloom'],
-    'ぞう' :  ['elephant'],
-    'おかし' : ['sweets'],
-    'あおぞら' : ['blue sky'],
-    'そおぞお' : ['imagination'],
-    'こうこうせい' : ['high school student','highschool student'],
-    'きあく' : ['memory'],
-    'さいご' : ['last'],
-    'くぎ' : ['hangnail','hang nail'],
-    'ごご' : ['5pm'],
-    'ここ' : ['moss'],
-    'こげき' : ['comedy'],
-    'けいこ' : [ "girl's name"],
-    'かお' : ['face'],
-    'いかが' : ['how are you?'],
-    'きく' : ['chrysanthemum'],
-    'かぐ' : ['furniture'],
-    'がか' : ['painter'],
-    'げき' : ['play'],
-    'かいこ' : ['discharge'],
-    'けいご' : ['honorific'],
-    'ごかい' : ['misunderstanding'],
-    'かがく' : ['science']
-    },
-    #$ ???
-    "katakana":{
-    }
-}
-#$ this is only for saving during the session? i save after everything cuz i usually close the program forcibly
-session_char_list=[
-#1
-{'あ' : [0],
-'い' : [0],
-'う' : [0],
-'え' : [0],
-'お' : [0]},
-#2
-{'か' : [0],
-'き' : [0],
-'く' : [0],
-'け' : [0],
-'こ' : [0],
-'が' : [0],
-'ぎ' : [0],
-'ぐ' : [0],
-'げ' : [0],
-'ご' : [0]},
-#3
-{'さ' : [0],
-'し' : [0],
-'す' : [0],
-'せ' : [0],
-'そ' : [0],
-'ざ' : [0],
-'じ' : [0],
-'ず' : [0],
-'ぜ' : [0],
-'ぞ' : [0],
-'ん' : [0]},
-#4
-{'た' : [0],
-'ち' : [0],
-'つ' : [0],
-'っ' : [0],
-'て' : [0],
-'と' : [0],
-'だ' : [0],
-'ぢ' : [0],
-'づ' : [0],
-'で' : [0],
-'ど' : [0]},
-#5
-{'な' : [0],
-'に' : [0],
-'ぬ' : [0],
-'ね' : [0],
-'の' : [0]},
-#6
-{'は' : [0],
-'ひ' : [0],
-'ふ' : [0],
-'へ' : [0],
-'ほ' : [0],
-'ば' : [0],
-'び' : [0],
-'ぶ' : [0],
-'べ' : [0],
-'ぼ' : [0],
-'ぱ' : [0],
-'ぴ' : [0],
-'ぷ' : [0],
-'ぺ' : [0],
-'ぽ' : [0]},
-#7
-{'ま' : [0],
-'み' : [0],
-'む' : [0],
-'め' : [0],
-'も' : [0]},
-#8
-{'や' : [0],
-'ゆ' : [0],
-'よ' : [0]},
- 
-#9
-{'ら' : [0],
-'り' : [0],
-'る' : [0],
-'れ' : [0],
-'ろ' : [0]},
-#$ lol nice regex under here man XD
-#1[0]
-{'わ' : [0],
-'を' : [0]},
-#11
-{'きゃ' : [0],
-'きゅ' : [0],
-'きょ' : [0],
-'ぎゃ' : [0],
-'ぎゅ' : [0],
-'ぎょ' : [0],
-'しゃ' : [0],
-'しゅ' : [0],
-'しょ' : [0],
-'じゃ' : [0],
-'じゅ' : [0],
-'じょ' : [0],
-'ちゃ' : [0],
-'ちゅ' : [0],
-'ちょ' : [0],
-'ひゃ' : [0],
-'ひゅ' : [0],
-'ひょ' : [0],
-'びゃ' : [0],
-'びゅ' : [0],
-'びょ' : [0],
-'ぴゃ' : [0],
-'ぴゅ' : [0],
-'ぴょ' : [0],
-'みゃ' : [0],
-'みゅ' : [0],
-'みょ' : [0],
-'りゃ' : [0],
-'りゅ' : [0],
-'りょ' : [0]}
-]
-#$ this actually has no usage in the code whats this used for
-# dir_dict={
-# '1' : ['vowels'],
-# '2' : ['k'],
-# '3' : ['s'],
-# '4' : ['t'],
-# '5' : ['n'],
-# '6' : ['h'],
-# '7' : ['m'],
-# '8' : ['y'],
-# '9' : ['r'],
-# '10' : ['w'],
-# '11' : ['katakana vowels']
-# '12' : ['katakana k']
-# '13' : ['katakana t']
-# '14' : ['katakana n']
-# '15' : ['katakana h']
-# }
+import os
 #use this for the save
 save_buffer={}
 #name of the file in which the save data is stored
@@ -573,8 +34,10 @@ def load():
             save_buffer={
             "chars":{},
             "words":{},
+            "phrases":{},
             "chars_number":0,
             "words_number":0,
+            "phrases_number":0,
             }
             lmao.write(json.dumps(save_buffer))
             return 1
@@ -587,121 +50,95 @@ def load():
                 return 0
             else:
                 return 2
-
+#delete comment for line below to clear screen each time program is executed
+#os.system('cls' if os.name == 'nt' else 'clear')
 if not load():
     sys.exit()
-c=int(input("Mode(1=character recognition,2=word recognition),3=Character Full List:"))
-#^ will clean this up next commit
+choices={
+    "hiragana":{
+        "first":char_dict["hiragana"],
+        "second":save_buffer["chars"],
+        "third":"chars_number",
+        "lower_range":0,
+        "upper_range":1
+    }
+    "katakana":{
+        "first":char_dict["katakana"],
+        "second":save_buffer["chars"],
+        "third":"chars_number",
+        "lower_range":0,
+        "upper_range":1
+    }
+    "words":{
+        "first":word_dict["hiragana"],
+        "second":save_buffer["words"],
+        "third":"words_number",
+        "lower_range":0,
+        "upper_range":1
+    }
+    "phrases":{
+        "first":word_dict["phrases"],
+        "second":save_buffer["phrases"],
+        "third":"phrases_number",
+        "lower_range":0,
+        "upper_range":1
+    }
+}
+prepareddict={}
+choice={}
+c=int(input("Modes:\n1=character recognition\n2=word recognition\n3=phrase recognition"))
+file_buffer=open("char_dict.json","r")
+char_dict=json.loads(file_buffer.read())
+file_buffer.close()
+file_buffer=open("char_display_dict.json","r")
+#used to display characters in english
+char_display_dict=json.loads(file_buffer.read())
+file_buffer.close()
+file_buffer=open("word_dict.json","r")
+word_dict=json.loads(file_buffer.read())
+file_buffer.close()
 if c == 1:
-    a=int(input("Number (katakana starts at 12):"))
+    a=int(input("1=Hiragana\n2=Katakana"))
+    choice=(choices["hiragana"],choices["katakana"])[a-1]
+    e=int(input("Group Number:"))
+    choice["upper_range"]=e
     d=int(input("Just that group? 1 for yes 2 for no "))
-    while True:
-        if d == 1:
-            group_number= a-1
-        else:
-            group_number=random.randint(0,a-1)
-        random_key=random.choice(list(char_dict["hiragana"][group_number]))
-        character_list=char_dict["hiragana"][group_number][random_key]
-        if random_key not in save_buffer["chars"].keys():
-            save_buffer["chars"][random_key]={"right":0,"wrong":0,"right_guesses":{},"wrong_guesses":{},"average_time":0,"times":[]}
-        l=save_buffer["chars"][random_key]
-        print(random_key)
-        time_start=time.time()
-        b=input()
-        time_end=time.time()
-        answer_time=time_end-time_start
-        l["times"].append(answer_time)
-        l["average_time"]=((l["right"]+l["wrong"])*l["average_time"]+answer_time)/(l["right"]+l["wrong"]+1)
-        if b in character_list:
-            if b in l["right_guesses"].keys():
-                l["right_guesses"][b]+=1
-            else:
-                l["right_guesses"][b]=1
-            l["right"]+=1
-            print("Good")
-        else:
-            if b in l["wrong_guesses"].keys():
-                l["wrong_guesses"][b]+=1
-            else:
-                l["wrong_guesses"][b]=1
-            l["wrong"]+=1
-            print("Bad " + str(character_list))
-        save_buffer["chars_number"]+=1
-        save()
+    choice["lower_range"]=(e-1,0)[d]
 elif c == 2:
-    while True:
-        random_key=random.choice(list(word_dict["hiragana"]))
-        word_list=word_dict["hiragana"][random_key]
-        if random_key not in save_buffer["words"].keys():
-            save_buffer["words"][random_key]={"right":0,"wrong":0,"right_guesses":{},"wrong_guesses":{},"average_time":0,"times":[]}
-        l=save_buffer["words"][random_key]
-        print(random_key)
-        time_start=time.time()
-        b=input()
-        time_end=time.time()
-        answer_time=time_end-time_start
-        l["times"].append(answer_time)
-        l["average_time"]=((l["right"]+l["wrong"])*l["average_time"]+answer_time)/(l["right"]+l["wrong"]+1)
-        if b.lower() in word_list:
-            if b in l["right_guesses"].keys():
-                l["right_guesses"][b]+=1
-            else:
-                l["right_guesses"][b]=1
-            l["right"]+=1
-            print("Good")
-        else:
-            if b in l["wrong_guesses"].keys():
-                l["wrong_guesses"][b]+=1
-            else:
-                l["wrong_guesses"][b]=1
-            l["wrong"]+=1
-            print("Bad " + str(word_list))
-        save_buffer["words_number"]+=1
-        save()
-#$ wtf is this used for, doesnt work in previous commit
+    choice=choices["words"]
 elif c == 3:
-        session_finish = False
-        group_number=random.randint(0,10)
-        while True:
-            while True:
-                random_key_check=random.choice(list(char_list[group_number]))
-                if session_char_list[random_key_check] == 0:
-                    random_key = random_key_check
-                    break
-                elif 0 in session_char_list.values() == False:
-                    session_finish = True
-                    break
-            if session_finish == False: 
-                character_list=char_list[group_number][random_key]
-                if random_key not in save_buffer["chars"].keys():
-                    save_buffer["chars"][random_key]={"right":0,"wrong":0,"right_guesses":{},"wrong_guesses":{},"average_time":0,"times":[]}
-                l=save_buffer["chars"][random_key]
-                print(random_key)
-                time_start=time.time()
-                b=input()
-                time_end=time.time()
-                answer_time=time_end-time_start
-                l["times"].append(answer_time)
-                l["average_time"]=((l["right"]+l["wrong"])*l["average_time"]+answer_time)/(l["right"]+l["wrong"]+1)
-                if b in character_list:
-                    if b in l["right_guesses"].keys():
-                        l["right_guesses"][b]+=1
-                    else:
-                        l["right_guesses"][b]=1
-                    l["right"]+=1
-                    print("Good")
-                    session_char_list[random_key_check] = 1
-                else:
-                    if b in l["wrong_guesses"].keys():
-                        l["wrong_guesses"][b]+=1
-                    else:
-                        l["wrong_guesses"][b]=1
-                    l["wrong"]+=1
-                    print("Bad " + str(character_list))
-                    session_char_list[random_key_check] = 2
-                save_buffer["chars_number"]+=1
-                save()
-            else:
-                break
-            break
-        print("Session finished.")
+    e=int(input("Group Number:"))
+    choice["upper_range"]=e
+    d=int(input("Just that group? 1 for yes 2 for no "))
+    choice["lower_range"]=(e-1,0)[d]    
+for i in range(choice["lower_range"],choice["upper_range"]):
+    prepareddict.update(choice["first"][i])
+while True:
+    random_key=random.choice(list(prepareddict))
+    currentlist=prepareddict["random_key"]
+    if random_key not in second.keys():
+        second[random_key]={"right":0,"wrong":0,"right_guesses":{},"wrong_guesses":{},"average_time":0,"times":[]}
+    l=second[random_key]
+    print(random_key)
+    time_start=time.time()
+    b=input()
+    time_end=time.time()
+    answer_time=time_end-time_start
+    l["times"].append(answer_time)
+    l["average_time"]=((l["right"]+l["wrong"])*l["average_time"]+answer_time)/(l["right"]+l["wrong"]+1)
+    if b.lower() in currentlist:
+        if b in l["right_guesses"].keys():
+            l["right_guesses"][b]+=1
+        else:
+            l["right_guesses"][b]=1
+        l["right"]+=1
+        print("Good")
+    else:
+        if b in l["wrong_guesses"].keys():
+            l["wrong_guesses"][b]+=1
+        else:
+            l["wrong_guesses"][b]=1
+        l["wrong"]+=1
+        print("Bad " + str(currentlist))
+    save_buffer[third]+=1
+    save()
