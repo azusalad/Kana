@@ -1,0 +1,197 @@
+こにちは
+hello
+
+さようなら
+good bye
+
+ビイビイ
+bye bye
+
+こんばんは
+good evening
+
+おはよう
+good morning
+
+すみません
+sorry, excuse me
+
+はい
+yes
+
+いいえ
+no
+
+ありがとう
+thank you
+
+おやすみ
+good night
+
+ただいま
+im home
+
+おかえり
+welcome home
+
+はじめまして
+nice to meet you
+
+よろしくおねがいします
+i look forward to working with you
+
+おはようございます
+polite good morning
+
+ありがとございます
+polite thank you
+
+おやすみなさい
+polite good night
+
+おかえりなさい
+polite welcome back
+
+いただきます
+itadakimasu
+
+ごちそうさま
+thanks after meal
+
+がくせい
+student
+
+かれ
+he
+
+あなた
+you neutral tone
+
+ぺんです
+this is a pen
+
+えいご
+english language
+
+いち
+one
+
+じ
+o clock
+
+いま
+now
+
+なに
+what
+
+なんじ
+what time
+
+さい
+years old
+
+の
+posessive particle
+
+にほん
+japan
+
+人
+attached to say nationality
+
+そう
+thats right
+
+そうですか
+is that right
+
+これ
+this
+
+私
+i
+
+それ
+that far from speaker close to listener
+
+ね
+right?
+
+あれ
+that far from speaker and listener
+
+高い / たかい
+expensive
+
+その
+this before a noun
+
+も
+also
+
+その
+that
+
+よ
+attached to the end of sentences when teh speaker wants to inform the listener or assume him of something
+
+あの
+that
+
+いくら
+how much
+
+円 えん　
+yen
+
+安い　やすい
+cheap
+
+だれ
+who
+
+友達　ともだち
+friend
+
+誰の　だれの
+whose
+
+どれ
+which
+
+どの
+which but before a noun
+
+が
+grammar particle for question words
+
+ここ
+here
+
+本当　ほんと
+really
+
+そこ
+there
+
+あそこ
+over there
+
+じゃありません
+politely negate a noun
+
+じゃあ
+well
+
+をください
+please give me
+
+おねがいします
+when asking for a favor
+
+をどうぞ
+here is
+
+とても
+very
