@@ -18,7 +18,7 @@ def get_path(wildcard):
 
 print('Choose a dictionary')
 file_path = get_path('*.txt')
-f = open(file_path, "r")
+f = open(file_path, "r",encoding='utf8')
 file_index = f.read().split("\n")
 f.close()
 """
