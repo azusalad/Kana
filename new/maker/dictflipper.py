@@ -24,7 +24,8 @@ flipped_dict = {}
 for x in old_dict:
     flipped_dict[str(old_dict[x])] = [x]  # swaps keys and values
 #new_path = re.sub(r"^.+\\(.+)\.txt$", r"\1" + ' flipped.txt', file_path)
-new_path = re.sub(r"^(.+\\.+)\.txt$", r"\1" + ' flipped.txt', file_path)
+new_path = re.sub(r"^(.+\/.+)\.txt$", r"\1" + ' flipped.txt', file_path)
+# change to re.sub(r"^(.+\\.+)\.txt$", r"\1" + ' flipped.txt', file_path) if you use windows
 f = open(new_path, 'w')
 #print(new_path)
 f.write(str(flipped_dict))
