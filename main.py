@@ -1,8 +1,15 @@
 import argparse
 import random
-from kanareadfile import readfile
 from config import *
+import sys
+sys.path.insert(0, '..')
+from checkpoint import checkpoint
+from feedback import feedback
+from flash_check import flash_check
 from kanadict import kana
+from kanareadfile import readfile
+from normal_check import normal_check
+
 
 parser = argparse.ArgumentParser(description='Kana flashcard program')
 parser.add_arguemnt('input_file', type=str, help='Flashcard dictionary file', required=True)
