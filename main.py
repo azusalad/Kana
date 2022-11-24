@@ -1,22 +1,24 @@
 import argparse
-import random
+import time
 from config import *
 import sys
-sys.path.insert(0, '..')
+sys.path.insert(0, 'assets')
 from checkpoint import checkpoint
+from choose_term import choose_term
 from feedback import feedback
 from flash_check import flash_check
 from kanadict import kana
 from kanareadfile import readfile
 from normal_check import normal_check
 
-
+"""
 parser = argparse.ArgumentParser(description='Kana flashcard program')
 parser.add_arguemnt('input_file', type=str, help='Flashcard dictionary file', required=True)
 parser.add_argument()
 parser.parse_args()
+"""
 
-flashcard_mode = True
+flashcard_mode = False
 input_file = 'lmao.txt'
 
 # initialize pp and other things
@@ -39,11 +41,22 @@ if not file_play:
 finish = False
 time_list = []
 session_play = 0
-correct_count = 0
+total_correct = 0
 combo = 0
-while not Finish:
-    # get a random kana
-    card = random.choice(kana_list)
+easy_list = []
+unique_correct = []
+while not finish:
+    
+    if len(unique_correct) == len(kana_list):
+        print('You got everything correct at least once')
+        # to never show this message again
+        unique_correct.append('a')
+    
+    # choose a kana
+    card = choose_term(kana_list, wrong_list, easy_list, session_play+file_play)
+    # if everything is in easy list
+    if not card:
+        break
     # print the key
     print(card.key)
     
@@ -58,17 +71,28 @@ while not Finish:
         if flashcard_mode:
             result = flash_check(card)
         else:
-            result = normal_check(card)
+            result = normal_check(card, answer)
+            # add to values if contested answer was correct
+            if type(result) == tuple:
+                card.values.append(answer)
+                result = result[0]
             
         # print feedback
-        feedback(card, correct_text, wrong_text)
+        feedback(card, result, correct_text, wrong_text)
         
-        # add to wrong list if needed else add to correct count
+        # add to wrong list if needed else add to correct and unique count
+        # if easy then remove from wrong list and add to easy list
         if result == 1:
-            wrong_list.append(card.key)
+            wrong_list.append(card)
         else:
-            correct_count += 1
+            total_correct += 1
             combo += 1
+            if card.key not in unique_correct:
+                unique_correct.append(card.key)
+            if result == 2:
+                if card.key in wrong_list:
+                    wrong_list.remove(card)
+                easy_list.append(card)
             
 
         # time
@@ -92,13 +116,13 @@ while not Finish:
         
         # do a checkpoint if needed
         if session_play % 25 == 0:
-            checkpoint(input_file, kana_list, wrong_list, session_play, total_play, average_time, combo, accuracy)
+            checkpoint(input_file, kana_list, wrong_list, session_play, session_play+file_play, average_time, combo, accuracy)
         
     else:
         finish = True
         
 
 # when done studying
-checkpoint(input_file, kana_list, wrong_list, session_play, total_play, average_time, combo, accuracy)
+checkpoint(input_file, kana_list, wrong_list, session_play, session_play+file_play, average_time, combo, accuracy)
 print('See you next time')
     

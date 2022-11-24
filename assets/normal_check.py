@@ -18,8 +18,9 @@ def normal_check(kana, guess):
     # they are not correct, allow them to contest
     if result != 0:
         contest = str(input("contest? ([y]es, anything for no)"))
+        # will add to the kana's values if the contested answer is correct
         if contest == 'y':
-            result = 0
+            return(0,guess)
         else:
             result = 1
             

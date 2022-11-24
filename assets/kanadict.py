@@ -10,28 +10,29 @@ class kana:
     
     def alter_pp(self, result, answer_time, average_time):
         # Alter performance points based on the result and time taken
-        from config import *
+        import config
         
         # first do correct, wrong, easy stuff
             # 0 for correct
     # 1 for incorrect
     # 2 for easy
         if result == 0:
-            self.pp +=  pp_correct
+            self.pp +=  config.pp_correct
         elif result == 1:
-            self.pp += pp_wrong
+            self.pp += config.pp_wrong
         else:
-            self.pp += pp_easy
+            self.pp += config.pp_easy
             
         # adjust pp based on time
         if answer_time < 0.5 * average_time and result == 0:
-            self.pp += pp_05bonus
+            self.pp += config.pp_05bonus
         elif answer_time > 1.5 * average_time:
-            self.pp += pp_15penalty
+            self.pp += config.pp_15penalty
         elif answer_time > 2 * average_time:
-            self.pp += pp_2penalty
+            self.pp += config.pp_2penalty
             
     def update_pp(self):
         # Update inactive kana
-        self.pp += pp_inactive
+        import config
+        self.pp += config.pp_inactive
     

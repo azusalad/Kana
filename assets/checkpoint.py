@@ -1,22 +1,24 @@
 def checkpoint(input_file, kana_list, wrong_list, session_play, total_play, average_time, combo, accuracy):
     # Writes to file, prints rank and pp
     
+    import os
+    
     # make term and pp dict
     term_dict = {}
     pp_dict = {}
     for x in kana_list:
-        term_dict[x.key] = x.values()
+        term_dict[x.key] = x.values
         pp_dict[x.key] = x.pp
         
     # write to file
     f = open(input_file, 'w', encoding="utf-8")
-    f.write(term_dict)
+    f.write(str(term_dict))
     f.write('\n')
-    f.write(pp_dict)
+    f.write(str(pp_dict))
     f.write('\n')
-    f.write(wrong_list)
+    f.write(str([x.key for x in wrong_list]))
     f.write('\n')
-    f.write(session_play + total_play)
+    f.write(str(session_play + total_play))
     f.close()
     
     # print rank pictures
@@ -44,6 +46,6 @@ def checkpoint(input_file, kana_list, wrong_list, session_play, total_play, aver
         
     # print some text
     print(
-        "\nYou have played " + str(sessionplay) + " times since Kana started!\nAverage time: " + str(average_time) + " Combo: " + str(combo) + " Accuracy: " + str(
+        "\nYou have played " + str(session_play) + " times since Kana started!\nAverage time: " + str(average_time) + " Combo: " + str(combo) + " Accuracy: " + str(
             accuracy) + " Rank: " + str(rank))
     print('Performance Points: ' + str(pp_dict) + '\n')
