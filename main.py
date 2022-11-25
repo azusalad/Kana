@@ -5,8 +5,7 @@ import sys
 sys.path.insert(0, 'assets')
 from kana_choose import choose_term
 from kana_class import kana
-from kana_feedback import feedback
-from kana_files import readfile, checkpoint
+from kana_io import readfile, checkpoint, feedback
 from kana_modes import flash_check, normal_check
 
 """
