@@ -1,5 +1,5 @@
 def choose_term(kana_list, wrong_list, easy_list, total_play):
-    # Choose a term from the kana list depending on the performance
+    """Choose a term from the kana list depending on the performance."""
     
     import random
     

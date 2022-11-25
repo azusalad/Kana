@@ -1,7 +1,7 @@
 def readfile(desired_file):
     '''
-    loads a file containing flashcard information
-    outputs a tuple
+    Loads a file containing flashcard information
+    Outputs a tuple.
     '''
     import ast
     
@@ -36,7 +36,7 @@ def readfile(desired_file):
 
 
 def checkpoint(input_file, kana_list, wrong_list, session_play, total_play, average_time, combo, accuracy):
-    # Writes to file, prints rank and pp
+    """Writes to file, prints rank and pp."""
     
     import os
     
@@ -93,7 +93,7 @@ def checkpoint(input_file, kana_list, wrong_list, session_play, total_play, aver
 def feedback(kana, result, correct_text, wrong_text):
     """
     Prints the feedback of the result
-    Like telling the user if they got it right
+    Like telling the user if they got it right.
     """
     
     # incorrect
