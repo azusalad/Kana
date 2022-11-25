@@ -3,13 +3,11 @@ import time
 from config import *
 import sys
 sys.path.insert(0, 'assets')
-from checkpoint import checkpoint
-from choose_term import choose_term
-from feedback import feedback
-from flash_check import flash_check
-from kanadict import kana
-from kanareadfile import readfile
-from normal_check import normal_check
+from kana_choose import choose_term
+from kana_class import kana
+from kana_feedback import feedback
+from kana_files import readfile, checkpoint
+from kana_modes import flash_check, normal_check
 
 """
 parser = argparse.ArgumentParser(description='Kana flashcard program')
@@ -45,8 +43,10 @@ total_correct = 0
 combo = 0
 easy_list = []
 unique_correct = []
+
 while not finish:
     
+    # check and let the uesr know if they got everything correct at least once
     if len(unique_correct) == len(kana_list):
         print('You got everything correct at least once')
         # to never show this message again
@@ -56,6 +56,7 @@ while not finish:
     card = choose_term(kana_list, wrong_list, easy_list, session_play+file_play)
     # if everything is in easy list
     if not card:
+        print('Everything has been put into the easy list.  Stopping program')
         break
     # print the key
     print(card.key)
@@ -115,7 +116,7 @@ while not finish:
         accuracy = total_correct / session_play
         
         # do a checkpoint if needed
-        if session_play % 25 == 0:
+        if session_play % checkpoint_turn == 0:
             checkpoint(input_file, kana_list, wrong_list, session_play, session_play+file_play, average_time, combo, accuracy)
         
     else:
