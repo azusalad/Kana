@@ -1,3 +1,4 @@
+from config import *
 def readfile(desired_file):
     '''
     Loads a file containing flashcard information
@@ -90,7 +91,7 @@ def checkpoint(input_file, kana_list, wrong_list, session_play, total_play, aver
 # 0 for correct
 # 1 for incorrect
 # 2 for easy
-def feedback(kana, result, correct_text, wrong_text):
+def feedback(kana, result):
     """
     Prints the feedback of the result
     Like telling the user if they got it right.
@@ -100,6 +101,10 @@ def feedback(kana, result, correct_text, wrong_text):
     if result == 1:
         print(str(wrong_text) + str(kana.values))
         
-    # correct/easy
-    elif result == 1:
+    # correct
+    elif result == 0:
         print(str(correct_text) + str(kana.values))
+
+    # easy
+    elif result == 2:
+        print('Okay this will not be shown for a while')

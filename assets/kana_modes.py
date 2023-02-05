@@ -1,3 +1,4 @@
+from kana_io import feedback
 # 0 for correct
 # 1 for incorrect
 # 2 for easy
@@ -22,6 +23,7 @@ def normal_check(kana, guess):
     # first check if they are correct
     for x in kana.values:
         if str(guess) == str(x):
+            feedback(kana, 0)
             result = 0
             # now ask if it is too easy
             easy = str(input("too easy?  (anything for no, [y]es)"))
@@ -30,6 +32,7 @@ def normal_check(kana, guess):
     
     # they are not correct, allow them to contest
     if result != 0:
+        feedback(kana, 1)
         contest = str(input("contest? ([y]es, anything for no)"))
         # will add to the kana's values if the contested answer is correct
         if contest == 'y':
