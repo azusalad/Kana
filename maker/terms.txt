@@ -1,11 +1,9 @@
-key1
-value1a
+そうじする
+to clean
 
-key2
-value2a
-value2b
-value2c
+きれい
+pretty
+clean
 
-key3
-value3a
-value3b
+せんたくする
+to do laundry

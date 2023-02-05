@@ -10,3 +10,4 @@ for i in d:
 a=open('dictionary.txt','w')
 a.write(json.dumps(b))
 a.close()
+print('Wrote dictionary.txt')

@@ -1,0 +1,1 @@
+{"\u305d\u3046\u3058\u3059\u308b": ["to clean"], "\u304d\u308c\u3044": ["pretty", "clean"], "\u305b\u3093\u305f\u304f\u3059\u308b": ["to do laundry"]}
