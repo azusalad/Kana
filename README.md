@@ -1,7 +1,7 @@
 # Kana
 Performance based flashcard program.  The program will learn what flashcards you are good at and bad.  The program looks at things like if you got the flashcard correct, time taken to answer, and user input.  Performance is saved when exiting the program.
 
-Currently the code is pretty messy and I have to clean it up.
+Currently the code is pretty messy and might not even work.  I have to clean it up.  There is a legacy file `legacy.py` that for sure works.
 
 ## Usage
 ### Make a Kana Set
