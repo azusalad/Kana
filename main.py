@@ -61,7 +61,7 @@ while not finish:
         print('Everything has been put into the easy list.  Stopping program')
         break
     # print the key
-    print(card.key)
+    print("\n" + card.key)
     
     # user answers
     time_start = time.time()
