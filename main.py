@@ -9,13 +9,13 @@ from kana_io import readfile, checkpoint, feedback
 from kana_modes import flash_check, normal_check
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-m", "--mode", required=True, help="Choose flashcard mode or normal mode [f/n]")
+parser.add_argument("-m", "--mode", required=True, help="Choose flashcard mode or normal mode [flash/normal]")
 parser.add_argument("input", help="Kana file to study")
 args = parser.parse_args()
 
-if args.mode == "f":
+if args.mode == "flash":
     flashcard_mode = True
-elif args.mode == "n":
+elif args.mode == "normal":
     flashcard_mode = False
 else:
     raise Exception("Invalid argument for --mode.  Choose either f or n")
@@ -81,7 +81,7 @@ while not finish:
                 result = result[0]
             
         # print feedback
-        feedback(card, result, correct_text, wrong_text)
+        feedback(card, result)
         
         # add to wrong list if needed else add to correct and unique count
         # if easy then remove from wrong list and add to easy list
