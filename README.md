@@ -34,4 +34,4 @@ In flashcard mode, you just have to think of the correct answer and the program 
 
 
 ## Options
-Edit `config.py` to edit performance changes and feedback text.  You can also edit the pictures in `assets/ranks/` with your desired feedback pictures.
+Edit `config.py` to edit performance changes and feedback text.  You can also edit the pictures in `assets/ranks/` with your desired feedback pictures.  To see the pictures, you must be using Kitty or Konsole.
