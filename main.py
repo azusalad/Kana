@@ -8,15 +8,18 @@ from kana_class import kana
 from kana_io import readfile, checkpoint, feedback
 from kana_modes import flash_check, normal_check
 
-"""
-parser = argparse.ArgumentParser(description='Kana flashcard program')
-parser.add_arguemnt('input_file', type=str, help='Flashcard dictionary file', required=True)
-parser.add_argument()
-parser.parse_args()
-"""
+parser = argparse.ArgumentParser()
+parser.add_argument("-m", "--mode", required=True, help="Choose flashcard mode or normal mode [f/n]")
+parser.add_argument("input", help="Kana file to study")
+args = parser.parse_args()
 
-flashcard_mode = False
-input_file = 'lmao.txt'
+if args.mode == "f":
+    flashcard_mode = True
+elif args.mode == "n":
+    flashcard_mode = False
+else:
+    raise Exception("Invalid argument for --mode.  Choose either f or n")
+input_file = args.input
 
 # initialize pp and other things
 term_dict, pp_dict, wrong_list, file_play = readfile(input_file)
