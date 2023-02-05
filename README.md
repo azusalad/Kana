@@ -32,3 +32,6 @@ In normal mode, you will have to type the value associated with the key shown an
 ### Flashcard Mode
 In flashcard mode, you just have to think of the correct answer and the program will ask if you got it right or wrong.  You do not have to type out the value like in normal mode.  When running flashcard mode, the program will first show a key.  Think of the value and then press enter.  The program will then show the correct value(s).  If you got it right just press enter.  If you did not get it right then type `n`.  If you got it right and you think this flashcard is so easy that you do not want to see it again, type `e` for easy.  When you are done playing, type !quit when shown a new flashcard to exit.  Performance will be saved.
 
+
+## Options
+Edit `config.py` to edit performance changes and feedback text.  You can also edit the pictures in `assets/ranks/` with your desired feedback pictures.
